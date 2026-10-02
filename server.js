@@ -24,7 +24,11 @@ function formatearProductoParaFrontend(row) {
     let fichaTecnica = [];
 
     try {
-        fotos = row.fotos_json ? JSON.parse(row.fotos_json) : [];
+        const parsed = row.fotos_json ? JSON.parse(row.fotos_json) : [];
+        fotos = parsed.map(f => ({
+            ...f,
+            url: f.filename ? `img/${f.filename}` : f.url
+        }));
     } catch (e) {
         fotos = [];
     }
