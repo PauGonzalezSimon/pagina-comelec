@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle - COMELEC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="img/logocomelec.png" alt="COMELEC Logo">
+            </a>
+        </div>
+
+        <div class="lang-dropdown">
+    <button id="btn-current-lang" class="btn-flag-main" onclick="toggleLangMenu()">
+        <img id="img-current-lang" src="https://flagcdn.com/w40/es.png" alt="Idioma">
+        <span class="arrow">▼</span>
+    </button>
+    
+    <div id="lang-menu" class="lang-menu-content">
+        <div class="lang-option" onclick="cambiarIdioma('es')">
+            <img src="https://flagcdn.com/w40/es.png" alt="España"> Español
+        </div>
+        <div class="lang-option" onclick="cambiarIdioma('en')">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English"> English
+        </div>
+        <div class="lang-option" onclick="cambiarIdioma('pt')">
+            <img src="https://flagcdn.com/w40/pt.png" alt="Português"> Português
+        </div>
+    </div>
+</div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html" data-i18n="back">Volver al Catálogo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="btn-volver" data-i18n="back">← Volver al listado</a>
+
+        <div id="contenedor-detalle" class="detalle-producto">
+            
+            <div class="detalle-imagen">
+                <img id="d-foto" src="" alt="Imagen">
+            </div>
+
+            <div class="detalle-info">
+                <span id="d-ref" class="detalle-ref">...</span>
+                <h1 id="d-nombre" class="detalle-titulo">...</h1>
+                <p id="d-precio" class="detalle-precio">--</p>
+                
+                <div class="descripcion-box">
+                    <p id="d-descripcion" class="detalle-descripcion">...</p>
+                </div>
+                
+                <a href="mailto:info@comelec.es" class="btn-view" style="background-color: var(--color-brand); color: white;" data-i18n="buy">Consultar Disponibilidad</a>
+
+                <div class="tech-section">
+                    <h3 class="tech-title" data-i18n="features">Características Generales</h3>
+                    <div id="d-caracteristicas" class="tech-content">-</div>
+                </div>
+
+                <div class="tech-section">
+                    <h3 class="tech-title" data-i18n="specs">Especificaciones Técnicas</h3>
+                    <div id="d-especificaciones" class="tech-content">-</div>
+                </div>
+                
+
+<div style="margin-top: 30px;">
+    <a id="btn-pdf" href="#" target="_blank" class="btn-download" style="display: none;">
+        📄 Descargar Ficha Técnica
+    </a>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p data-i18n="footer_text">&copy; 2025 COMELEC ELECTRODOMESTICOS</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

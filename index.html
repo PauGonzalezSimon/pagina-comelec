@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMELEC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="img/logocomelec.png" alt="COMELEC Logo">
+        </div>
+
+       <div class="lang-dropdown">
+    <button id="btn-current-lang" class="btn-flag-main" onclick="toggleLangMenu()">
+        <img id="img-current-lang" src="https://flagcdn.com/w40/es.png" alt="Idioma">
+        <span class="arrow">▼</span>
+    </button>
+    
+    <div id="lang-menu" class="lang-menu-content">
+        <div class="lang-option" onclick="cambiarIdioma('es')">
+            <img src="https://flagcdn.com/w40/es.png" alt="España"> Español
+        </div>
+        <div class="lang-option" onclick="cambiarIdioma('en')">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English"> English
+        </div>
+        <div class="lang-option" onclick="cambiarIdioma('pt')">
+            <img src="https://flagcdn.com/w40/pt.png" alt="Português"> Português
+        </div>
+    </div>
+</div>
+        
+       <nav>
+    <ul>
+        <li><a href="#" onclick="filtrar('todo', this)" class="nav-active">Todo</a></li>
+        
+        <li><a href="#" onclick="filtrar('Hornos', this)" data-i18n="nav_ovens">Hornos</a></li>
+        <li><a href="#" onclick="filtrar('Cocina', this)" data-i18n="nav_kitchen">Cocina</a></li>
+        <li><a href="#" onclick="filtrar('Aspiración', this)" data-i18n="nav_vacuum">Aspiración</a></li>
+        <li><a href="#" onclick="filtrar('Cuidado Personal', this)" data-i18n="nav_personal">Cuidado Personal</a></li>
+        <li><a href="#" onclick="filtrar('Menaje', this)" data-i18n="nav_houseware">Menaje</a></li>
+        <li><a href="#" onclick="filtrar('Accesorios', this)" data-i18n="nav_accessories">Accesorios</a></li>
+        <li><a href="#" onclick="filtrar('Otros', this)" data-i18n="nav_others">Otros</a></li>
+    </ul>
+</nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-i18n="hero_title">NUNCA NADIE DIO TANTO<br>POR TAN POCO</h1>
+            <p data-i18n="hero_subtitle">Electrodomésticos adaptados a todas las necesidades.</p>
+        </div>
+        <div class="scroll-indicator">⌄</div>
+    </section>
+
+    <div class="brands-bar">
+        <div class="brands-container">
+            <div class="brands-grid">
+                <img src="img/logos/leroymerlin.png" alt="Leroy Merlin">
+                <img src="img/logos/carrefour.png" alt="Carrefour" class="logo-grande-xl">
+                <img src="img/logos/pccomponenteslogo.png" alt="PcComponentes" class="logo-grande-l">
+                <img src="img/logos/amazonsinfondo.png" alt="Amazon">
+                <img src="img/logos/eldissersinfondo.png" alt="Eldisser">
+                <img src="img/logos/alcamposinfondo.png" alt="Alcampo">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="news_title">Novedades 2025</h2>
+            <div class="search-container">
+    <input type="text" id="buscador" placeholder="🔍 Buscar por nombre o referencia" onkeyup="buscarProducto()">
+</div>
+        </div>
+
+        <div class="grid-productos" id="contenedor-catalogo">
+            <p style="text-align:center;">Loading...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p data-i18n="footer_text">&copy; 2025 COMELEC ELECTRODOMESTICOS | Tecnología para todos</p>
+    </footer>
+<button id="btn-top" onclick="subirArriba()" title="Volver arriba">↑</button>
+    <script src="script.js"></script>
+
+</body>
+</html>
