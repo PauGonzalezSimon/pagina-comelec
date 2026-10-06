@@ -28,8 +28,11 @@ const traducciones = {
         nav_others: "Otros",
         hero_title: "NUNCA NADIE DIO TANTO<br>POR TAN POCO",
         hero_subtitle: "Electrodomésticos adaptados a todas las necesidades.",
-        news_title: "Novedades 2025",
-        footer_text: "© 2025 COMELEC ELECTRODOMESTICOS | Tecnología para todos",
+        hero_cta: "Ver Catálogo 2026",
+        hero_scroll: "Explorar productos",
+        hero_search_placeholder: "🔍 Buscar por nombre o referencia",
+        news_title: "Novedades 2026",
+        footer_text: "© 2026 COMELEC ELECTRODOMESTICOS | Tecnología para todos",
         back: "← Volver al catálogo",
         details: "Ver Detalles",
         features: "Características Generales",
@@ -55,8 +58,11 @@ const traducciones = {
         nav_others: "Others",
         hero_title: "NO ONE EVER GAVE SO MUCH<br>FOR SO LITTLE",
         hero_subtitle: "Appliances adapted to all needs.",
-        news_title: "New Arrivals 2025",
-        footer_text: "© 2025 COMELEC APPLIANCES | Technology for everyone",
+        hero_cta: "View 2026 Catalog",
+        hero_scroll: "Explore products",
+        hero_search_placeholder: "🔍 Search by name or reference",
+        news_title: "New Arrivals 2026",
+        footer_text: "© 2026 COMELEC APPLIANCES | Technology for everyone",
         back: "← Back to catalog",
         details: "View Details",
         features: "General Features",
@@ -82,8 +88,11 @@ const traducciones = {
         nav_others: "Outros",
         hero_title: "NINGUÉM NUNCA DEU TANTO<br>POR TÃO POUCO",
         hero_subtitle: "Eletrodomésticos adaptados a todas as necessidades.",
-        news_title: "Novidades 2025",
-        footer_text: "© 2025 COMELEC ELETRODOMÉSTICOS | Tecnologia para todos",
+        hero_cta: "Ver Catálogo 2026",
+        hero_scroll: "Explorar produtos",
+        hero_search_placeholder: "🔍 Pesquisar por nome ou referência",
+        news_title: "Novidades 2026",
+        footer_text: "© 2026 COMELEC ELETRODOMÉSTICOS | Tecnologia para todos",
         back: "← Voltar ao catálogo",
         details: "Ver Detalhes",
         features: "Características Gerais",
@@ -91,7 +100,7 @@ const traducciones = {
         buy: "Consultar Disponibilidade",
         consult: "Consultar",
         new: "NOVO",
-        no_desc: "Sem descrição disponível.",
+        no_desc: "Sem descrição disponible.",
         download_pdf: "📄 Baixar Ficha Técnica",
         empty_category: "Não há produtos correspondentes.",
         error_load: "Não foi possível carregar os produtos",
@@ -150,6 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (traducciones[idiomaActual][key]) el.innerHTML = traducciones[idiomaActual][key];
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (traducciones[idiomaActual][key]) el.placeholder = traducciones[idiomaActual][key];
     });
 
     const gridCatalogo = document.getElementById('contenedor-catalogo');
@@ -292,9 +306,11 @@ function filtrar(categoria, elementoBtn) {
         document.querySelectorAll('nav a').forEach(el => el.classList.remove('nav-active'));
         elementoBtn.classList.add('nav-active');
     }
-    // 2. Limpiar búsqueda
+    // 2. Limpiar búsqueda (ambos inputs: inferior y hero)
     const buscador = document.getElementById('buscador');
     if (buscador) buscador.value = '';
+    const buscadorHero = document.getElementById('buscador-hero');
+    if (buscadorHero) buscadorHero.value = '';
 
     // 3. Título
     const titulo = document.querySelector('.section-title');
@@ -318,10 +334,35 @@ function filtrar(categoria, elementoBtn) {
 }
 
 // ==========================================
-// 6. BÚSQUEDA
+// 6. BÚSQUEDA Y SCROLL
 // ==========================================
+function sincronizarBusqueda(valor) {
+    const buscador = document.getElementById('buscador');
+    const buscadorHero = document.getElementById('buscador-hero');
+    if (buscador && buscador.value !== valor) buscador.value = valor;
+    if (buscadorHero && buscadorHero.value !== valor) buscadorHero.value = valor;
+    buscarProducto();
+}
+
+function scrollHaciaCatalogo(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const target = document.getElementById('catalogo-seccion');
+    if (target) {
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+}
+
 function buscarProducto() {
-    const texto = document.getElementById('buscador').value.toLowerCase();
+    const buscador = document.getElementById('buscador');
+    if (!buscador) return;
+    const texto = buscador.value.toLowerCase();
+
+    // Mantener sincronizado el buscador del hero
+    const buscadorHero = document.getElementById('buscador-hero');
+    if (buscadorHero && buscadorHero.value !== buscador.value) {
+        buscadorHero.value = buscador.value;
+    }
 
     if (texto === '') {
         document.querySelectorAll('nav a').forEach(el => el.classList.remove('nav-active'));

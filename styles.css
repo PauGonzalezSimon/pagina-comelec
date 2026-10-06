@@ -234,14 +234,140 @@ nav a.nav-active {
     text-align: center;
 }
 .hero p { font-size: 1.4rem; font-weight: 400; opacity: 0.95; margin: 0 auto; max-width: 800px; }
-.scroll-indicator {
-    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-    color: white; font-size: 2rem; animation: bounce 2s infinite; opacity: 0.8; cursor: pointer;
+/* --- HERO CTAs & BUSCADOR --- */
+.hero-dual-cta {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
-    40% {transform: translateY(-10px) translateX(-50%);}
-    60% {transform: translateY(-5px) translateX(-50%);}
+
+/* Botón Primario: Catálogo */
+.btn-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    color: var(--color-brand);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 15px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-cta-primary:hover {
+    background-color: var(--color-brand);
+    color: #ffffff;
+    border-color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.btn-cta-primary:active {
+    transform: translateY(-1px);
+}
+
+/* Caja de búsqueda en el Hero (estilo gemelo al buscador inferior) */
+.hero-search-container {
+    flex: 0 1 380px;
+    min-width: 280px;
+}
+
+#buscador-hero {
+    width: 100%;
+    padding: 15px 25px;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    color: #333333;
+}
+
+#buscador-hero::placeholder {
+    color: #888888;
+    font-style: italic;
+}
+
+#buscador-hero:focus {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 650px) {
+    .hero-dual-cta {
+        flex-direction: column;
+        gap: 14px;
+    }
+    .btn-cta-primary,
+    .hero-search-container {
+        width: 100%;
+        max-width: 360px;
+    }
+}
+
+/* Indicador inferior: Cápsula flotante animada */
+.scroll-pill-indicator {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 22px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+.scroll-pill-indicator:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    transform: translateX(-50%) translateY(2px);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.scroll-chevron-svg {
+    width: 14px;
+    height: 14px;
+    animation: bounceSvg 1.8s infinite ease-in-out;
+}
+
+@keyframes bounceSvg {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
 }
 
 /* --- MARCAS --- */

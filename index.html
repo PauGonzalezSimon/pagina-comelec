@@ -52,8 +52,26 @@
         <div class="hero-content">
             <h1 data-i18n="hero_title">NUNCA NADIE DIO TANTO<br>POR TAN POCO</h1>
             <p data-i18n="hero_subtitle">Electrodomésticos adaptados a todas las necesidades.</p>
+
+            <!-- ACCIONES DEL HERO: BOTÓN CATÁLOGO + BUSCADOR -->
+            <div class="hero-dual-cta">
+                <a href="#catalogo-seccion" class="btn-cta-primary" onclick="scrollHaciaCatalogo(event)">
+                    <span data-i18n="hero_cta">Ver Catálogo 2026</span>
+                    <span style="font-size: 1.1rem;">↓</span>
+                </a>
+                <div class="hero-search-container">
+                    <input type="text" id="buscador-hero" placeholder="🔍 Buscar por nombre o referencia" data-i18n-placeholder="hero_search_placeholder" oninput="sincronizarBusqueda(this.value)" onkeydown="if(event.key==='Enter'){scrollHaciaCatalogo(event);}">
+                </div>
+            </div>
         </div>
-        <div class="scroll-indicator">⌄</div>
+
+        <!-- INDICADOR INFERIOR EN CÁPSULA -->
+        <a href="#catalogo-seccion" class="scroll-pill-indicator" onclick="scrollHaciaCatalogo(event)" title="Explorar productos">
+            <span data-i18n="hero_scroll">Explorar productos</span>
+            <svg class="scroll-chevron-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
     </section>
 
     <div class="brands-bar">
@@ -69,12 +87,12 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="catalogo-seccion">
         <div class="section-header">
-            <h2 class="section-title" data-i18n="news_title">Novedades 2025</h2>
+            <h2 class="section-title" data-i18n="news_title">Novedades 2026</h2>
             <div class="search-container">
-    <input type="text" id="buscador" placeholder="🔍 Buscar por nombre o referencia" onkeyup="buscarProducto()">
-</div>
+                <input type="text" id="buscador" placeholder="🔍 Buscar por nombre o referencia" data-i18n-placeholder="hero_search_placeholder" onkeyup="buscarProducto()">
+            </div>
         </div>
 
         <div class="grid-productos" id="contenedor-catalogo">
@@ -118,7 +136,7 @@
     </div>
 
     <footer>
-        <p data-i18n="footer_text">&copy; 2025 COMELEC ELECTRODOMESTICOS | Tecnología para todos</p>
+        <p data-i18n="footer_text">&copy; 2026 COMELEC ELECTRODOMESTICOS | Tecnología para todos</p>
     </footer>
 <button id="btn-top" onclick="subirArriba()" title="Volver arriba">↑</button>
     <script src="script.js"></script>

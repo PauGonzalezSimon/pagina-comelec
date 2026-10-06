@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMELEC - Boceto 3 (Filtros Rápidos + Botón Onda)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ============================================================
+           BOCETO 3: CTA Central + Chips de Categorías + Anillo Pulsante
+           ============================================================ */
+
+        .hero-b3-wrapper {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Botón Principal */
+        .btn-b3-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            color: var(--color-brand);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 16px 38px;
+            border-radius: 40px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .btn-b3-main:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
+            background: #ffffff;
+        }
+
+        /* Chips de categorías rápidas */
+        .hero-chips-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            max-width: 850px;
+        }
+
+        .chip-label {
+            font-size: 0.85rem;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.85;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .category-chip {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 7px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .category-chip:hover {
+            background: #ffffff;
+            color: var(--color-brand);
+            border-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Indicador Inferior con Anillo Ondulado (Ripple Effect) */
+        .scroll-ripple-container {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 5;
+        }
+
+        .ripple-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .ripple-btn::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            animation: pulseRipple 2s infinite ease-out;
+        }
+
+        @keyframes pulseRipple {
+            0% { transform: scale(0.9); opacity: 0.9; }
+            70% { transform: scale(1.4); opacity: 0; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        .scroll-ripple-container:hover .ripple-btn {
+            background: #ffffff;
+            color: var(--color-brand);
+            border-color: #ffffff;
+            transform: translateY(3px);
+        }
+
+        .ripple-text {
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            transition: color 0.3s ease;
+        }
+
+        .scroll-ripple-container:hover .ripple-text {
+            color: #ffffff;
+        }
+
+        /* Barra de navegación de bocetos */
+        .bocetos-bar {
+            background: #111;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .bocetos-bar a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .bocetos-bar a:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.15);
+        }
+        .bocetos-bar a.active-boceto {
+            background: var(--color-brand);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Selector de bocetos -->
+    <div class="bocetos-bar">
+        <span>🎨 <strong>Bocetos de CTA:</strong></span>
+        <a href="boceto1.html">Boceto 1: Píldora + Scroll</a>
+        <a href="boceto2.html">Boceto 2: Doble Acción</a>
+        <a href="boceto3.html" class="active-boceto">Boceto 3: Categorías Rápidas</a>
+        <a href="index.html" style="margin-left: 15px; opacity: 0.7;">← Original</a>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <img src="img/logocomelec.png" alt="COMELEC Logo">
+        </div>
+
+       <div class="lang-dropdown">
+            <button id="btn-current-lang" class="btn-flag-main" onclick="toggleLangMenu()">
+                <img id="img-current-lang" src="https://flagcdn.com/w40/es.png" alt="Idioma">
+                <span class="arrow">▼</span>
+            </button>
+            
+            <div id="lang-menu" class="lang-menu-content">
+                <div class="lang-option" onclick="cambiarIdioma('es')">
+                    <img src="https://flagcdn.com/w40/es.png" alt="España"> Español
+                </div>
+                <div class="lang-option" onclick="cambiarIdioma('en')">
+                    <img src="https://flagcdn.com/w40/gb.png" alt="English"> English
+                </div>
+                <div class="lang-option" onclick="cambiarIdioma('pt')">
+                    <img src="https://flagcdn.com/w40/pt.png" alt="Português"> Português
+                </div>
+            </div>
+        </div>
+        
+       <nav>
+            <ul>
+                <li><a href="#" onclick="filtrar('todo', this)" class="nav-active" id="nav-todo">Todo</a></li>
+                <li><a href="#" onclick="filtrar('Hornos', this)" data-i18n="nav_ovens">Hornos</a></li>
+                <li><a href="#" onclick="filtrar('Cocina', this)" data-i18n="nav_kitchen">Cocina</a></li>
+                <li><a href="#" onclick="filtrar('Aspiración', this)" data-i18n="nav_vacuum">Aspiración</a></li>
+                <li><a href="#" onclick="filtrar('Cuidado Personal', this)" data-i18n="nav_personal">Cuidado Personal</a></li>
+                <li><a href="#" onclick="filtrar('Menaje', this)" data-i18n="nav_houseware">Menaje</a></li>
+                <li><a href="#" onclick="filtrar('Accesorios', this)" data-i18n="nav_accessories">Accesorios</a></li>
+                <li><a href="#" onclick="filtrar('Otros', this)" data-i18n="nav_others">Otros</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN HERO CON BOCETO 3 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-i18n="hero_title">NUNCA NADIE DIO TANTO<br>POR TAN POCO</h1>
+            <p data-i18n="hero_subtitle">Electrodomésticos adaptados a todas las necesidades.</p>
+            
+            <!-- CONTENEDOR BOCETO 3 -->
+            <div class="hero-b3-wrapper">
+                <a href="#catalogo-seccion" class="btn-b3-main" onclick="scrollHaciaCatalogo(event)">
+                    <span>Ver Catálogo Completo</span>
+                    <span style="font-size: 1.15rem;">↓</span>
+                </a>
+
+                <!-- CHIPS DE ACCESO DIRECTO -->
+                <div class="hero-chips-container">
+                    <span class="chip-label">Populares:</span>
+                    <button class="category-chip" onclick="filtrarRapido('Hornos', event)">🔥 Hornos</button>
+                    <button class="category-chip" onclick="filtrarRapido('Cocina', event)">🍳 Cocina</button>
+                    <button class="category-chip" onclick="filtrarRapido('Aspiración', event)">🧹 Aspiración</button>
+                    <button class="category-chip" onclick="filtrarRapido('Cuidado Personal', event)">✂️ Cuidado Personal</button>
+                    <button class="category-chip" onclick="filtrarRapido('Menaje', event)">🍽️ Menaje</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- INDICADOR INFERIOR CON ANILLO ONDULADO -->
+        <a href="#catalogo-seccion" class="scroll-ripple-container" onclick="scrollHaciaCatalogo(event)" title="Ver productos">
+            <div class="ripple-btn">
+                <span>↓</span>
+            </div>
+            <span class="ripple-text">Desliza para ver más</span>
+        </a>
+    </section>
+
+    <div class="brands-bar">
+        <div class="brands-container">
+            <div class="brands-grid">
+                <img src="img/logos/leroymerlin.png" alt="Leroy Merlin">
+                <img src="img/logos/carrefour.png" alt="Carrefour" class="logo-grande-xl">
+                <img src="img/logos/pccomponenteslogo.png" alt="PcComponentes" class="logo-grande-l">
+                <img src="img/logos/amazonsinfondo.png" alt="Amazon">
+                <img src="img/logos/eldissersinfondo.png" alt="Eldisser">
+                <img src="img/logos/alcamposinfondo.png" alt="Alcampo">
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="catalogo-seccion">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="news_title">Novedades 2025</h2>
+            <div class="search-container">
+                <input type="text" id="buscador" placeholder="🔍 Buscar por nombre o referencia" onkeyup="buscarProducto()">
+            </div>
+        </div>
+
+        <div class="grid-productos" id="contenedor-catalogo">
+            <div class="skeleton-card">
+                <div class="skeleton-shimmer skeleton-img"></div>
+                <div class="skeleton-body">
+                    <div class="skeleton-shimmer skeleton-ref"></div>
+                    <div class="skeleton-shimmer skeleton-title"></div>
+                    <div class="skeleton-shimmer skeleton-desc"></div>
+                    <div class="skeleton-shimmer skeleton-btn"></div>
+                </div>
+            </div>
+            <div class="skeleton-card">
+                <div class="skeleton-shimmer skeleton-img"></div>
+                <div class="skeleton-body">
+                    <div class="skeleton-shimmer skeleton-ref"></div>
+                    <div class="skeleton-shimmer skeleton-title"></div>
+                    <div class="skeleton-shimmer skeleton-desc"></div>
+                    <div class="skeleton-shimmer skeleton-btn"></div>
+                </div>
+            </div>
+            <div class="skeleton-card">
+                <div class="skeleton-shimmer skeleton-img"></div>
+                <div class="skeleton-body">
+                    <div class="skeleton-shimmer skeleton-ref"></div>
+                    <div class="skeleton-shimmer skeleton-title"></div>
+                    <div class="skeleton-shimmer skeleton-desc"></div>
+                    <div class="skeleton-shimmer skeleton-btn"></div>
+                </div>
+            </div>
+            <div class="skeleton-card">
+                <div class="skeleton-shimmer skeleton-img"></div>
+                <div class="skeleton-body">
+                    <div class="skeleton-shimmer skeleton-ref"></div>
+                    <div class="skeleton-shimmer skeleton-title"></div>
+                    <div class="skeleton-shimmer skeleton-desc"></div>
+                    <div class="skeleton-shimmer skeleton-btn"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p data-i18n="footer_text">&copy; 2025 COMELEC ELECTRODOMESTICOS | Tecnología para todos</p>
+    </footer>
+
+    <button id="btn-top" onclick="subirArriba()" title="Volver arriba">↑</button>
+
+    <script src="script.js"></script>
+    <script>
+        function scrollHaciaCatalogo(e) {
+            if (e) e.preventDefault();
+            const target = document.getElementById('catalogo-seccion');
+            if (target) {
+                const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        }
+
+        function filtrarRapido(categoria, e) {
+            if (e) e.preventDefault();
+            // Buscar el enlace del menú correspondiente
+            const navLink = Array.from(document.querySelectorAll('nav a')).find(a => a.textContent.trim().toLowerCase() === categoria.toLowerCase());
+            filtrar(categoria, navLink || null);
+            scrollHaciaCatalogo();
+        }
+    </script>
+</body>
+</html>
