@@ -39,7 +39,10 @@ const traducciones = {
         new: "NUEVO",
         no_desc: "Sin descripción disponible.",
         download_pdf: "📄 Descargar Ficha Técnica",
-        empty_category: "No hay productos que coincidan."
+        empty_category: "No hay productos que coincidan.",
+        error_load: "No se han podido cargar los productos",
+        error_load_sub: "Ha ocurrido un problema al conectar con el servidor. Por favor, inténtalo de nuevo.",
+        retry: "↻ Reintentar"
     },
     en: {
         loading: "Loading catalog...",
@@ -63,7 +66,10 @@ const traducciones = {
         new: "NEW",
         no_desc: "No description available.",
         download_pdf: "📄 Download Data Sheet",
-        empty_category: "No matching products found."
+        empty_category: "No matching products found.",
+        error_load: "Could not load products",
+        error_load_sub: "A problem occurred while connecting to the server. Please try again.",
+        retry: "↻ Retry"
     },
     pt: {
         loading: "Carregando catálogo...",
@@ -87,7 +93,10 @@ const traducciones = {
         new: "NOVO",
         no_desc: "Sem descrição disponível.",
         download_pdf: "📄 Baixar Ficha Técnica",
-        empty_category: "Não há produtos correspondentes."
+        empty_category: "Não há produtos correspondentes.",
+        error_load: "Não foi possível carregar os produtos",
+        error_load_sub: "Ocorreu um problema ao conectar com o servidor. Por favor, tente novamente.",
+        retry: "↻ Tentar novamente"
     }
 };
 
@@ -152,27 +161,90 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 // 5. CATÁLOGO & FILTROS
 // ==========================================
+function mostrarSkeleton() {
+    const grid = document.getElementById('contenedor-catalogo');
+    if (!grid) return;
+    grid.innerHTML = `
+        <div class="skeleton-card">
+            <div class="skeleton-shimmer skeleton-img"></div>
+            <div class="skeleton-body">
+                <div class="skeleton-shimmer skeleton-ref"></div>
+                <div class="skeleton-shimmer skeleton-title"></div>
+                <div class="skeleton-shimmer skeleton-desc"></div>
+                <div class="skeleton-shimmer skeleton-btn"></div>
+            </div>
+        </div>
+        <div class="skeleton-card">
+            <div class="skeleton-shimmer skeleton-img"></div>
+            <div class="skeleton-body">
+                <div class="skeleton-shimmer skeleton-ref"></div>
+                <div class="skeleton-shimmer skeleton-title"></div>
+                <div class="skeleton-shimmer skeleton-desc"></div>
+                <div class="skeleton-shimmer skeleton-btn"></div>
+            </div>
+        </div>
+        <div class="skeleton-card">
+            <div class="skeleton-shimmer skeleton-img"></div>
+            <div class="skeleton-body">
+                <div class="skeleton-shimmer skeleton-ref"></div>
+                <div class="skeleton-shimmer skeleton-title"></div>
+                <div class="skeleton-shimmer skeleton-desc"></div>
+                <div class="skeleton-shimmer skeleton-btn"></div>
+            </div>
+        </div>
+        <div class="skeleton-card">
+            <div class="skeleton-shimmer skeleton-img"></div>
+            <div class="skeleton-body">
+                <div class="skeleton-shimmer skeleton-ref"></div>
+                <div class="skeleton-shimmer skeleton-title"></div>
+                <div class="skeleton-shimmer skeleton-desc"></div>
+                <div class="skeleton-shimmer skeleton-btn"></div>
+            </div>
+        </div>
+    `;
+}
+
+function mostrarErrorCatalogo() {
+    const grid = document.getElementById('contenedor-catalogo');
+    if (!grid) return;
+    const t = traducciones[idiomaActual] || traducciones.es;
+    grid.innerHTML = `
+        <div class="error-container fade-in">
+            <div class="error-icon">⚠️</div>
+            <h3 class="error-message">${t.error_load}</h3>
+            <p class="error-subtitle">${t.error_load_sub}</p>
+            <button class="btn-retry" onclick="cargarCatalogo()">
+                ${t.retry}
+            </button>
+        </div>
+    `;
+}
+
 async function cargarCatalogo() {
     const grid = document.getElementById('contenedor-catalogo');
-    grid.innerHTML = `<p style="text-align:center; width:100%">${traducciones[idiomaActual].loading}</p>`;
+    if (!grid) return;
+    mostrarSkeleton();
 
     try {
         if (todosLosProductos.length === 0) {
-            // Llamada al backend (sin token expuesto)
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 12000); // 12s timeout
+
             const url = `${API_BASE_URL}/productos`;
-            const respuesta = await fetch(url);
+            const respuesta = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeoutId);
 
             if (!respuesta.ok) {
                 throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
             }
 
             const data = await respuesta.json();
-            todosLosProductos = data.records;
+            todosLosProductos = data.records || [];
         }
         renderizarProductos(todosLosProductos);
     } catch (error) {
-        console.error(error);
-        grid.innerHTML = '<p>Error de conexión.</p>';
+        console.error('Fallo al cargar catálogo:', error);
+        mostrarErrorCatalogo();
     }
 }
 

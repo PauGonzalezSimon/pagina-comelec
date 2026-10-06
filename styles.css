@@ -383,6 +383,127 @@ nav a.nav-active {
     animation: fadeIn 0.5s ease-out forwards;
 }
 
+/* --- SKELETON LOADER (CSS PURO) --- */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+    background: linear-gradient(90deg, #ececec 25%, #f7f7f7 50%, #ececec 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 6px;
+}
+
+.skeleton-card {
+    background-color: var(--color-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    overflow: hidden;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.skeleton-img {
+    height: 300px;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+}
+
+.skeleton-body {
+    padding: 25px 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.skeleton-ref {
+    width: 40%;
+    height: 14px;
+}
+
+.skeleton-title {
+    width: 80%;
+    height: 22px;
+}
+
+.skeleton-desc {
+    width: 60%;
+    height: 14px;
+}
+
+.skeleton-btn {
+    width: 140px;
+    height: 38px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+/* --- ESTADO DE ERROR & REINTENTO --- */
+.error-container {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.error-icon {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.error-message {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.error-subtitle {
+    font-size: 0.95rem;
+    color: #777;
+    max-width: 480px;
+}
+
+.btn-retry {
+    margin-top: 10px;
+    background-color: var(--color-brand);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(111, 44, 62, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-retry:hover {
+    background-color: #8e3a50;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(111, 44, 62, 0.4);
+}
+
+.btn-retry:active {
+    transform: translateY(0);
+}
+
 /* --- PÁGINA DE DETALLE --- */
 .detalle-producto { display: flex; gap: 60px; margin-top: 40px; align-items: flex-start; }
 .detalle-imagen { flex: 1; background: white; padding: 40px; border: 1px solid #eee; text-align: center; border-radius: 8px; }
