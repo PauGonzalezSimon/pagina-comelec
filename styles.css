@@ -371,13 +371,41 @@ nav a.nav-active {
 }
 
 /* --- MARCAS --- */
-.brands-bar { background-color: #ffffff; border-bottom: 1px solid #e5e5e5; padding: 40px 20px; width: 100%; }
+.brands-bar {
+    background-color: #fcfcfc;
+    border-bottom: 1px solid #eeeeee;
+    border-top: 1px solid #f2f2f2;
+    padding: 35px 20px;
+    width: 100%;
+}
 .brands-container { max-width: 1200px; margin: 0 auto; text-align: center; }
+.brands-title {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888888;
+    margin-bottom: 25px;
+}
 .brands-grid { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 50px 70px; }
-.brands-grid img { height: 55px; width: auto; object-fit: contain; opacity: 0.9; transition: all 0.3s ease; cursor: pointer; }
-.brands-grid img.logo-grande-xl { height: 80px; }
-.brands-grid img.logo-grande-l { height: 70px; }
-.brands-grid img:hover { opacity: 1; transform: scale(1.1); }
+.brands-grid img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(50%) saturate(0.3) contrast(0.9);
+    opacity: 0.6;
+    transition: all 0.35s ease;
+    cursor: pointer;
+}
+.brands-grid img.logo-grande-xl { height: 68px; }
+.brands-grid img.logo-grande-l { height: 60px; }
+.brands-grid img:hover {
+    filter: grayscale(0%) saturate(1) contrast(1);
+    opacity: 1;
+    transform: scale(1.08);
+}
 
 /* --- LAYOUT GENERAL --- */
 .container { max-width: 1400px; margin: 60px auto 80px; padding: 0 5%; }
