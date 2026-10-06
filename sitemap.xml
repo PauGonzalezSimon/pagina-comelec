@@ -7,6 +7,24 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://comelec-web.onrender.com/aviso-legal.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://comelec-web.onrender.com/privacidad.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://comelec-web.onrender.com/cookies.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://comelec-web.onrender.com/detalle.html?id=rec0edUkPCTnZTfP6</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>

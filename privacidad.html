@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - COMELEC Electrodomésticos</title>
+    <meta name="description" content="Política de privacidad y protección de datos de COMELEC Electrodomésticos conforme al RGPD europeo y la LOPDGDD española.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://comelec-web.onrender.com/privacidad.html">
+    <link rel="icon" type="image/png" href="img/logocomelec.png">
+    <link rel="apple-touch-icon" href="img/logocomelec.png">
+    <meta name="theme-color" content="#6f2c3e">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html" aria-label="Ir al inicio de COMELEC">
+                <img src="img/logocomelec.png" alt="COMELEC Logo">
+            </a>
+        </div>
+
+        <div class="lang-dropdown">
+            <button id="btn-current-lang" class="btn-flag-main" onclick="toggleLangMenu()">
+                <img id="img-current-lang" src="https://flagcdn.com/w40/es.png" alt="Idioma">
+                <span class="arrow">▼</span>
+            </button>
+            <div id="lang-menu" class="lang-menu-content">
+                <div class="lang-option" onclick="cambiarIdioma('es')">
+                    <img src="https://flagcdn.com/w40/es.png" alt="España"> Español
+                </div>
+                <div class="lang-option" onclick="cambiarIdioma('en')">
+                    <img src="https://flagcdn.com/w40/gb.png" alt="English"> English
+                </div>
+                <div class="lang-option" onclick="cambiarIdioma('pt')">
+                    <img src="https://flagcdn.com/w40/pt.png" alt="Português"> Português
+                </div>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html" data-i18n="back">← Volver al Catálogo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="legal-container">
+        <a href="index.html" class="btn-volver" style="margin-bottom: 25px;" data-i18n="back">← Volver al Catálogo</a>
+
+        <div class="legal-header">
+            <h1 data-i18n="privacy_policy">Política de Privacidad</h1>
+            <p class="legal-updated">Conforme al Reglamento General de Protección de Datos (RGPD UE 2016/679) y Ley Orgánica 3/2018 (LOPDGDD)</p>
+        </div>
+
+        <div class="legal-content">
+            <div class="legal-box-highlight">
+                <p><strong>Responsable del Tratamiento:</strong> COMELEC ELECTRODOMÉSTICOS</p>
+                <p><strong>Finalidad:</strong> Gestión y respuesta a consultas comerciales, soporte técnico y disponibilidad de productos</p>
+                <p><strong>Legitimación:</strong> Consentimiento inequívoco del interesado al remitir su comunicación</p>
+                <p><strong>Contacto de Privacidad:</strong> <a href="mailto:info@comelec.es">info@comelec.es</a></p>
+            </div>
+
+            <h2>1. Principios Aplicables al Tratamiento de Datos</h2>
+            <p>En el tratamiento de sus datos personales, COMELEC aplica los principios de licitud, lealtad y transparencia, minimización de datos (solicitando únicamente los datos estrictamente necesarios), exactitud, limitación del plazo de conservación e integridad y confidencialidad.</p>
+
+            <h2>2. ¿Qué datos personales recopilamos?</h2>
+            <p>A través de nuestro catálogo digital no se solicitan datos bancarios ni contraseñas. Únicamente se pueden recopilar:</p>
+            <ul>
+                <li><strong>Datos de contacto facilitados voluntariamente:</strong> Si usted contacta mediante nuestro enlace de correo electrónico para consultar disponibilidad de electrodomésticos o fichas técnicas (nombre, dirección de correo electrónico y contenido de la consulta).</li>
+                <li><strong>Datos técnicos y de navegación:</strong> Información anónima necesaria para la navegación y la selección de idioma (almacenada localmente en su propio navegador mediante <em>localStorage</em>).</li>
+            </ul>
+
+            <h2>3. Finalidad del Tratamiento</h2>
+            <p>COMELEC tratará sus datos personales exclusivamente con las siguientes finalidades:</p>
+            <ul>
+                <li>Atender y resolver las solicitudes de información, dudas comerciales o consultas de servicio técnico enviadas por los usuarios.</li>
+                <li>Garantizar el correcto funcionamiento técnico de la plataforma y mejorar la experiencia de usuario en el catálogo digital.</li>
+            </ul>
+
+            <h2>4. Plazo de Conservación de los Datos</h2>
+            <p>Los datos personales proporcionados se conservarán durante el tiempo estrictamente necesario para cumplir con la finalidad para la que fueron recabados y para determinar las posibles responsabilidades que se pudieran derivar de dicha finalidad y del tratamiento de los datos.</p>
+
+            <h2>5. Destinatarios y Cesión de Datos</h2>
+            <p>COMELEC <strong>no venderá, cederá ni distribuirá</strong> sus datos personales a terceras empresas sin su consentimiento expreso, salvo que exista una obligación legalmente exigible por parte de autoridades públicas o judiciales competentes.</p>
+
+            <h2>6. Sus Derechos de Protección de Datos (ARCO-POL)</h2>
+            <p>Usted puede ejercer en cualquier momento sus derechos reconocidos por el RGPD:</p>
+            <ul>
+                <li><strong>Derecho de Acceso:</strong> Conocer si estamos tratando sus datos personales y solicitar una copia de los mismos.</li>
+                <li><strong>Derecho de Rectificación:</strong> Solicitar la corrección de datos inexactos o incompletos.</li>
+                <li><strong>Derecho de Supresión:</strong> Solicitar que sus datos sean eliminados cuando ya no sean necesarios para los fines para los que fueron recogidos.</li>
+                <li><strong>Derecho de Oposición y Limitación:</strong> Oponerse al tratamiento o solicitar que se limite en determinadas circunstancias.</li>
+                <li><strong>Derecho a la Portabilidad:</strong> Recibir sus datos personales en un formato estructurado y de uso común.</li>
+            </ul>
+            <p>Para ejercer cualquiera de estos derechos, basta con enviar un correo electrónico a <a href="mailto:info@comelec.es">info@comelec.es</a> indicando en el asunto "Protección de Datos". Asimismo, tiene derecho a presentar una reclamación ante la autoridad de control competente, la <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">Agencia Española de Protección de Datos (AEPD)</a>.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="aviso-legal.html" data-i18n="legal_notice">Aviso Legal</a>
+            <span class="footer-sep">•</span>
+            <a href="privacidad.html" data-i18n="privacy_policy">Política de Privacidad</a>
+            <span class="footer-sep">•</span>
+            <a href="cookies.html" data-i18n="cookies_policy">Política de Cookies</a>
+        </div>
+        <p data-i18n="footer_text">&copy; 2026 COMELEC ELECTRODOMESTICOS | Tecnología para todos</p>
+    </footer>
+
+    <button id="btn-top" onclick="subirArriba()" title="Volver arriba">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
