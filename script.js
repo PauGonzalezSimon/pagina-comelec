@@ -281,6 +281,7 @@ function renderizarProductos(lista) {
 
         const imgUrl = (f.Fotos && f.Fotos.length > 0) ? f.Fotos[0].url : 'https://via.placeholder.com/300';
         const nombre = getCampo(f, 'Nombre');
+        const refTexto = f.Referencia ? `REF. ${f.Referencia}` : '';
         const etiqueta = f.Etiqueta ? `<span class="badge">${traducciones[idiomaActual].new}</span>` : '';
 
         const card = document.createElement('article');
@@ -291,12 +292,12 @@ function renderizarProductos(lista) {
         card.innerHTML = `
             <div class="image-wrapper">
                 ${etiqueta}
-                <img src="${imgUrl}" alt="${nombre}">
+                <img src="${imgUrl}" alt="${nombre} - COMELEC ${refTexto}" loading="lazy" decoding="async" width="300" height="300">
             </div>
             <div class="card-body">
-                <span class="card-ref">REF. ${f.Referencia || ''}</span>
+                <span class="card-ref">${refTexto}</span>
                 <h4>${nombre}</h4>
-                <a href="detalle.html?id=${record.id}" class="btn-view">${traducciones[idiomaActual].details}</a>
+                <a href="detalle.html?id=${record.id}" class="btn-view" aria-label="Ver detalles de ${nombre}">${traducciones[idiomaActual].details}</a>
             </div>
         `;
         grid.appendChild(card);
@@ -412,17 +413,81 @@ async function cargarDetalle() {
         const descProducto = getCampo(f, 'Descripcion');
         const caracProducto = getCampo(f, 'Caracteristicas');
         const especProducto = getCampo(f, 'Especificaciones');
+        const refTexto = f.Referencia || '';
 
-        document.title = `${nombreProducto} - COMELEC`;
+        // --- SEO Dinámico para Motores de Búsqueda ---
+        const pageTitle = `${nombreProducto} ${refTexto ? '| REF. ' + refTexto : ''} - COMELEC Electrodomésticos`;
+        document.title = pageTitle;
+
+        const seoDescText = descProducto ? descProducto.substring(0, 160) : `Detalles y especificaciones de ${nombreProducto} de COMELEC.`;
+        const metaDesc = document.getElementById('meta-description');
+        if (metaDesc) metaDesc.content = seoDescText;
+
+        const canonical = document.getElementById('canonical-link');
+        const fullUrl = window.location.href;
+        if (canonical) canonical.href = fullUrl;
+
+        // Open Graph & Twitter Cards dinámicos
+        const ogTitle = document.getElementById('og-title');
+        if (ogTitle) ogTitle.content = pageTitle;
+        const ogDesc = document.getElementById('og-desc');
+        if (ogDesc) ogDesc.content = seoDescText;
+        const ogUrl = document.getElementById('og-url');
+        if (ogUrl) ogUrl.content = fullUrl;
+
+        const twTitle = document.getElementById('twitter-title');
+        if (twTitle) twTitle.content = pageTitle;
+        const twDesc = document.getElementById('twitter-desc');
+        if (twDesc) twDesc.content = seoDescText;
+
+        // Inyección en interfaz de usuario
         document.getElementById('d-nombre').innerText = nombreProducto;
-        document.getElementById('d-ref').innerText = `REF. ${f.Referencia || '---'}`;
+        document.getElementById('d-ref').innerText = `REF. ${refTexto || '---'}`;
         document.getElementById('d-descripcion').innerText = descProducto || traducciones[idiomaActual].no_desc;
         document.getElementById('d-precio').innerText = f.Precio ? `${f.Precio} €` : traducciones[idiomaActual].consult;
         document.getElementById('d-caracteristicas').innerHTML = caracProducto ? caracProducto.replace(/\n/g, '<br>') : '-';
         document.getElementById('d-especificaciones').innerHTML = especProducto ? especProducto.replace(/\n/g, '<br>') : '-';
 
+        let fotoUrlCompleta = 'https://comelec-web.onrender.com/img/logocomelec.png';
         if (f.Fotos && f.Fotos.length > 0) {
-            document.getElementById('d-foto').src = f.Fotos[0].url;
+            const fotoPath = f.Fotos[0].url;
+            document.getElementById('d-foto').src = fotoPath;
+            document.getElementById('d-foto').alt = `${nombreProducto} - COMELEC ${refTexto}`;
+            fotoUrlCompleta = fotoPath.startsWith('http') ? fotoPath : window.location.origin + '/' + fotoPath;
+
+            const ogImg = document.getElementById('og-image');
+            if (ogImg) ogImg.content = fotoUrlCompleta;
+            const twImg = document.getElementById('twitter-image');
+            if (twImg) twImg.content = fotoUrlCompleta;
+        }
+
+        // Schema.org Product JSON-LD dinámico (Google Rich Snippets)
+        const schemaEl = document.getElementById('product-schema');
+        if (schemaEl) {
+            const productSchema = {
+                "@context": "https://schema.org/",
+                "@type": "Product",
+                "name": nombreProducto,
+                "image": fotoUrlCompleta,
+                "description": descProducto || seoDescText,
+                "sku": refTexto || idProducto,
+                "mpn": refTexto || idProducto,
+                "brand": {
+                    "@type": "Brand",
+                    "name": "COMELEC"
+                },
+                "category": f.Categoria || "Electrodomésticos",
+                "offers": {
+                    "@type": "Offer",
+                    "url": fullUrl,
+                    "priceCurrency": "EUR",
+                    "price": f.Precio ? String(f.Precio) : "0.00",
+                    "priceValidUntil": "2027-12-31",
+                    "availability": "https://schema.org/InStock",
+                    "itemCondition": "https://schema.org/NewCondition"
+                }
+            };
+            schemaEl.textContent = JSON.stringify(productSchema);
         }
 
         const btnPdf = document.getElementById('btn-pdf');

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap oficial del catálogo COMELEC
+Sitemap: https://comelec-web.onrender.com/sitemap.xml

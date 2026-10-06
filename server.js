@@ -119,6 +119,36 @@ app.get('/api/health', (req, res) => {
     }
 });
 
+// Servir sitemap.xml dinámico desde SQLite
+app.get('/sitemap.xml', (req, res) => {
+    try {
+        const rows = db.prepare('SELECT id FROM productos').all();
+        const baseUrl = process.env.BASE_URL || 'https://comelec-web.onrender.com';
+        const today = new Date().toISOString().split('T')[0];
+
+        let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+        xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+        xml += `  <url>\n    <loc>${baseUrl}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n`;
+
+        rows.forEach(p => {
+            xml += `  <url>\n    <loc>${baseUrl}/detalle.html?id=${encodeURIComponent(p.id)}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+        });
+
+        xml += `</urlset>\n`;
+
+        res.header('Content-Type', 'application/xml');
+        res.send(xml);
+    } catch (err) {
+        console.error('Error generando sitemap:', err);
+        res.sendFile(path.join(__dirname, 'sitemap.xml'));
+    }
+});
+
+// Servir robots.txt
+app.get('/robots.txt', (req, res) => {
+    res.sendFile(path.join(__dirname, 'robots.txt'));
+});
+
 // Servir archivos estáticos (HTML, CSS, JS, imágenes)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
